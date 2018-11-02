@@ -1,17 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context path="/" docBase="www">
-    <Resource
-            name="jdbc/user"
-            auth="Container"
-            type="javax.sql.DataSource"
-            driverClassName="com.mysql.jdbc.Driver"
-            factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
-            loginTimeout="10"
-            validationQuery="SELECT 1 FROM DUAL"
-            maxWait="5000"
-            username="dope"
-            password="aksekfxn1"
-            testOnBorrow="true"
-            url="jdbc:mysql://13.209.103.1:3306/member?useSSL=false"/>
-    <ResourceLink type="javax.sql.data.DataSource" name="jdbc/user" global="jdbc/user" />
-</Context>
+<?xml version="1.0" encoding="UTF-8"?> 
+<Context> 
+    <!-- Specify a JDBC datasource --> 
+    <Resource name="jdbc/MySQL" auth="Container" 
+     type="javax.sql.DataSource" username="kmg" password="P@ssw0rd" 
+     driverClassName="com.mysql.jdbc.Driver" 
+     url="jdbc:mysql://35.194.113.107:3306/webdb?useSSL=true"/> 
+</Context>  

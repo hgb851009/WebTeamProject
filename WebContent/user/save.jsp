@@ -1,10 +1,12 @@
-<%@page import="com.user.userVO"%>
-<%@ page import="com.user.userDAO" %>
+<%@page import="domain.UserVO"%>
+<%@ page import="persistence.UserDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% request.setCharacterEncoding("utf-8"); %>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
 
-<jsp:useBean id="userVO" scope="request" class="com.user.userVO"></jsp:useBean>
+<jsp:useBean id="userVO" scope="request" class="domain.UserVO"></jsp:useBean>
 <jsp:setProperty name="userVO" property="*"></jsp:setProperty>
 
 <%
@@ -24,7 +26,7 @@
 	}
 %>
 <%
-	userDAO result = new userDAO().register(userID, userName, userNickName, userPwd);
+	UserDAO result = new UserDAO().register(userID, userName, userNickName, userPwd);
 	//씨발 왜안되지???
 	System.out.println(userVO.getUserID());
 	System.out.println(userVO.getUserName());

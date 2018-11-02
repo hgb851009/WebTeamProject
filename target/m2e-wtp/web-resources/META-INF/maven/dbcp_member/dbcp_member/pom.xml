@@ -1,6 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>WebTeamProject</artifactId>
+  <groupId>dbcp_member</groupId>
+  <artifactId>dbcp_member</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <build>
@@ -29,7 +30,6 @@
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>5.1.46</version>
-		   <scope>provided</scope>
 		</dependency>
   		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
 		<dependency>
@@ -71,7 +71,6 @@
 		</dependency>
 		
   </dependencies>
-  <groupId>WebTeamProject</groupId>
 </project>
 
 

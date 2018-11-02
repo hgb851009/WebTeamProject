@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% request.setCharacterEncoding("utf-8"); %>
 
-<jsp:useBean id="userVO" scope="request" class="com.user.userVO"></jsp:useBean>
+<jsp:useBean id="userVO" scope="request" class="domain.UserVO"></jsp:useBean>
 <html>
 <head>
 	<meta charset="utf-8">

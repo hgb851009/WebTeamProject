@@ -1,4 +1,4 @@
-<%@ page import="com.user.userVO" %>
+<%@ page import="domain.UserVO" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,8 +12,8 @@
 <c:if test="${sessionScope.userLevel ne 1}">
 	<c:redirect url = "../warning.html"/>
 </c:if>
-<jsp:useBean id="userVO" scope="request" class="com.user.userVO"></jsp:useBean>
-<jsp:useBean id="userDAO" class="com.user.userDAO"></jsp:useBean>
+<jsp:useBean id="userVO" scope="request" class="domain.UserVO"></jsp:useBean>
+<jsp:useBean id="userDAO" class="persistence.UserDAO"></jsp:useBean>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -68,10 +68,10 @@
 		</thead>
 		<tbody>
 		<%
-			ArrayList<userVO> list = userDAO.getMemberAll();
+			ArrayList<UserVO> list = userDAO.getMemberAll();
 			int index = 1;
 			String passwordLength = "";
-			for (userVO vo : list) {
+			for (UserVO vo : list) {
 		%>
 		<tr>
 			<% for (int i=0;i<vo.getUserPwd().length();i++) passwordLength += "*";%>
