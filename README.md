@@ -1,2 +1,2 @@
 # WebTeamProject
-<img src="../webtimp.png">
+<img src="webtimp.png">
