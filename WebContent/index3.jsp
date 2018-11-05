@@ -14,7 +14,7 @@
 	}
 </style>
 <!-- 메인화면  -->
-<link rel="stylesheet" href="./mainpage/mainpage.css">
+<link rel="stylesheet" href="assets/css/mainpage.css">
 </head>
 <body>
 	<nav class="novbar novbak-default">
@@ -23,12 +23,13 @@
 			style="background-repeat: repeat;" class="logo-home">
 		</a>
 		<div class="moving-sun animated1" style="z-index: 2">
-			<img src="images/sun.png">
+			<img src="images/sun.png" class="move-sun">
 		</div>
 		<div class="moving-fly animated2" style="z-index: 2">
-			<img src="images/fly.png">
+			<img src="images/fly.png" class="move-fly">
 		</div>
-		<img src="images/main.jpg" style="width:100%;height:; max-width: 100%; max-height: 100%; background-image: url();position: relative;z-index: 1">
+		<div><img src="images/main.jpg" style="width:95%;height:; max-width: 100%; max-height: 100%; background-image: url();position: relative;z-index: 1">
+		</div>
 	</nav>
 </body>
 </html>
