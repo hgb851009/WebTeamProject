@@ -1,12 +1,21 @@
 package domain;
 
 public class UserVO {
-	String userID;
-	String userName;
-	String userNickName;
-	String userPwd;
-	String userPwd2;
-	String userLevel;
+	private String userID;
+	private String userName;
+	private String userNickName;
+	private String userPwd;
+	private String userPwd2;
+	private String userLevel;
+	private int userPoint;
+
+	public int getUserPoint() {
+		return userPoint;
+	}
+
+	public void setUserPoint(int userPoint) {
+		this.userPoint = userPoint;
+	}
 
 	public String getUserLevel() {
 		return userLevel;
