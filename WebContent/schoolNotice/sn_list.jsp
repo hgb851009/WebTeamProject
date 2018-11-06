@@ -34,11 +34,23 @@
     	text-decoration:none;}
     sub{
     	color:silver;}
+    #s-banner {
+ 		position: fixed;
+		width: 100px;
+		height: 110px;
+		top: 420px;
+		right: 53%;
+        padding: 20px;
+		margin-right: -900px;}
 </style>
 </head>
 <body>
+<a href="index3.jsp"><img src="images/한글빛로고최종.png" height="120px" align="left"></a>
 <c:set var="userName" value="<%=loginUser%>"></c:set>
-<c:out value="LOGIN ID : ${userName }"></c:out>
+<%-- <c:out value="LOGIN ID : ${userName }"></c:out> --%>
+<div id="s-banner" align="right"><input type="button" id="work" style="height: 80px; width:180px; font-size: 30px;
+border-color: navy; background-color: white; font-weight: bold; " 
+onclick="location.href='workInfo.do'" value="채용 공고 >"></div>
 <div id="s-container">
 	<c:if test="${userName eq 'root'}">
 		<a href="schoolNotice/sn_new.jsp" style="float: right; background: orange;">글쓰기</a><br><br>

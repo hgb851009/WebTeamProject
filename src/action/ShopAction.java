@@ -3,6 +3,7 @@ package action;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import domain.AvatarVO;
 import domain.ItemVO;
@@ -22,7 +23,9 @@ public class ShopAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest req) throws Exception {
-		String userId = req.getParameter("user_id");
+		//String userId = req.getParameter("user_id");
+		HttpSession session=req.getSession(false);
+		String userId=String.valueOf(session.getAttribute("id"));
 		
 		UserDAO udao = new UserDAO();
 		ItemDAO idao = new ItemDAO();

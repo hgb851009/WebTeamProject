@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 
 import domain.AvatarVO;
 import domain.UserVO;
+import domain.c_VO;
 
 import java.security.Key;
 import java.sql.Connection;
@@ -23,7 +24,7 @@ public class UserDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-	private static String algorithm = "DESede";
+/*	private static String algorithm = "DESede";
 	private static Key Key = null;
 	private static Cipher cipher = null;
 	
@@ -55,35 +56,48 @@ public class UserDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
+	
+	private Connection getConnection() {
+		try {Context ctx=new InitialContext();
+			 	DataSource ds=(DataSource) ctx.lookup("java:comp/env/jdbc/MySQL");
+			 	return ds.getConnection();
+		} catch (NamingException | SQLException e) {
+				e.printStackTrace();
+		}return null;}
+	
+	private void close(Connection con,PreparedStatement pstmt,ResultSet rs) {
+		try {if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(con!=null) con.close();
+		}catch(SQLException e) {
+			e.printStackTrace();}}
+	
+	private void close(Connection con,PreparedStatement pstmt) {
+		try {	if(pstmt!=null) pstmt.close();
+				if(con!=null) con.close();
+		}catch(SQLException e) {
+			e.printStackTrace();}}
 	
 	//로그인 메소드
 	public int login(String userID, String userPwd) {
+		int result=0;
+		
 		con = getConnection();
-		String SQL = "SELECT * FROM USER WHERE userID = ?";
+		String SQL = "SELECT count(*) FROM user WHERE userID=? AND userpwd=?";
 		try {
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setString(1, userID);
+			pstmt.setString(2, userPwd);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				if (rs.getString(2).equals(userPwd)) {
-					return 1; // 로그인 성공
-				} else {
-					return 0; // 비밀번호 불일치
-				}
-			}
-			return -1; // 아이디가 없음
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				close(con, pstmt, rs);
-			} catch (Exception e) {
+			if(rs.next())
+			result=rs.getInt(1);
+		} catch (SQLException e) {
 				e.printStackTrace();
-			}
-		}
-		return -2; // 데이터베이스 오류
-	}
+		}finally {
+				close(con,pstmt,rs);}
+		return result;}
+	
 	//사용자 레벨 확인
 	public String[] getUserInfo(String userID) {
 		con = getConnection();

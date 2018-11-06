@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<%	//String loginUser=String.valueOf(session.getAttribute("id")); %>	  	
+<%	String loginUser=String.valueOf(session.getAttribute("id")); %>	  	
 <!DOCTYPE html>
 <html>
 <head>
+<a href="index3.jsp"><img src="images/한글빛로고최종.png" height="120px" align="left"></a>
+<%-- <c:if test="${loginUser eq 'null'|| loginUser eq null || loginUser eq '' || empty loginUser}">
+<script>
+alert('로그인을 해주세요! '+${loginUser});
+location.replace("index3.jsp");
+</script>
+</c:if> --%>
 <meta charset="UTF-8">
 <title>Board</title>
 <style>
@@ -45,6 +52,7 @@
 </style>
 </head>
 <body>
+
 <c:out value="LOGIN NICKNAME : ${loginuser.userNickName }"></c:out>
 <div id="s-banner" align="right">
 <div align="center"><br>

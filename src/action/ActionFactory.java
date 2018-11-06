@@ -103,7 +103,11 @@ public class ActionFactory {
 		}else if(cmd.equals("/updateBoard.do")) {
 			action=new b_UpdateAction("boardView.do");
 		}else if(cmd.equals("/delBoard.do")) {
-			action=new b_DelBoardAction("board.do");//---------------------------------------
+			action=new b_DelBoardAction("board.do");
+		}else if(cmd.equals("/login.do")) {//Login--------------------------------
+			action=new u_LoginAction("index3.jsp");
+		}else if(cmd.equals("/logout.do")) {
+			action=new u_LogoutAction("index3.jsp");
 		}
 		return action;
 	}

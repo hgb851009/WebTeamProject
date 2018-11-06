@@ -28,17 +28,27 @@ public class cp_ListAction implements Action {
 		
 		if(session!=null) {
 		user=(String) session.getAttribute("id");
+		}else{
+			path="error/error.jsp";
 		}
-		if(user!="root") {
+		if(!user.equals("root")) {
 			clist=dao.cList(user);
 			plist=dao.pList();
-		}else if(user=="root"){
+		}else if(user.equals("root")){
 			clist=dao.cList();
 			plist=dao.pList();
 		}
 		
+		if(!plist.isEmpty()&&!plist.isEmpty()) {
+		
 			req.setAttribute("clist",clist);
 			req.setAttribute("plist",plist);
+			
+		}else if(!clist.isEmpty()) {
+			req.setAttribute("plist", plist);
+		}else {
+			path="error/error.jsp";
+		}
 		
 		return new ActionForward(path,false);
 	}

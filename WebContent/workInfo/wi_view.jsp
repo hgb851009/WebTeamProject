@@ -46,10 +46,11 @@ String cur_page=request.getParameter("page");
 </style>
 </head>
 <body>
+<a href="index3.jsp"><img src="images/한글빛로고최종.png" height="120px" align="left"></a>
 <form method="post" role="form">
  <!-- 로그인정보 -->
 <c:set var="userName" value="<%=loginUser%>"></c:set>
-<c:out value="LOGIN ID : ${userName }"></c:out>
+<%-- <c:out value="LOGIN ID : ${userName }"></c:out> --%>
 
 <c:set var="rNo" value="1"></c:set><br>
 

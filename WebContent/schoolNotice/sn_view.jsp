@@ -33,17 +33,17 @@
         border: 1px solid gray;}
 </style>
 </head>
+<a href="index3.jsp"><img src="images/한글빛로고최종.png" height="120px" align="left"></a>
 <form method="post" role="form">
  <!-- 로그인정보 -->
 <c:set var="userName" value="<%=loginUser%>"></c:set>
-<c:out value="LOGIN ID : ${userName }"></c:out>
+<%-- <c:out value="LOGIN ID : ${userName }"></c:out> --%>
 <!-- 관리자 메뉴  / 전체 목록으로 돌아가기-->
-	<c:if test="${userName eq 'root'}">
-		<button id="modify" style="font-size: 5px;">글수정</button>
-		<button id="delete" style="font-size: 5px;">글삭제</button>
-	</c:if>
+<button id="list">전체 목록</button>
+
 <c:set var="rNo" value="1"></c:set><br>
-<button id="list" align="left">전체 목록</button>
+
+
 
 <div id="s-container">
 <!-- 글 정보 시작 -->
@@ -117,7 +117,15 @@
 	<input type="hidden" value="<%=session.getAttribute("id")%>" name="userID">
 	<input type="hidden" value="default" name="rno">
 </form>
+
 </div>
+
+</div>
+<div align="center">
+	<c:if test="${userName eq 'root'}">
+		<button id="modify" style="font-size: 5px;">글수정</button>
+		<button id="delete" style="font-size: 5px;">글삭제</button>
+	</c:if>
 </div>
 <script>
 	function del(rn){

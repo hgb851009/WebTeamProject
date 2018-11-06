@@ -14,7 +14,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.jsp">메인으로 돌아가기</a>
+        <a class="navbar-brand" href="index3.jsp">메인으로 돌아가기</a>
         
       </div>
     </nav>

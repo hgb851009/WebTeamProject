@@ -9,7 +9,7 @@ String loginUser=String.valueOf(session.getAttribute("id"));
 <html>
 <head>
 <c:set var="userName" value="<%=loginUser%>"></c:set>
-<c:out value="LOGIN ID : ${userName }"></c:out>
+<%-- <c:out value="LOGIN ID : ${userName }"></c:out> --%>
 <c:if test="${userName ne 'root'}">
 <script>
 alert('잘못된 접근');

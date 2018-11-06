@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<a href="index3.jsp"><img src="images/한글빛로고최종.png" height="120px" align="left"></a>
 <!--     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/shop-homepage.css" rel="stylesheet"> -->
 <meta charset="UTF-8">

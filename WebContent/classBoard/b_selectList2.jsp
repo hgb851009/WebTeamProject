@@ -6,6 +6,7 @@ int kind;%>
 <!DOCTYPE html>
 <html>
 <head>
+<a href="index3.jsp"><img src="images/한글빛로고최종.png" height="120px" align="left"></a>
 <meta charset="UTF-8">
 <title>Board</title>
 <style>

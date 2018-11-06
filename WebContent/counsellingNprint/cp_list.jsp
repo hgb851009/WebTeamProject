@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<a href="index3.jsp"><img src="images/한글빛로고최종.png" height="120px" align="left"></a>
 <meta charset="UTF-8">
 <title>DAEWOO</title>
 <style>
@@ -39,6 +40,12 @@
 <body>
 <c:set var="user" value="<%=loginUser%>"></c:set>
 <c:out value="LOGIN ID : ${user }"></c:out>
+<c:if test="${user eq 'null' || user eq ''}">
+<script>
+alert('로그인을 해주세요!');
+location.replace("index3.jsp");
+</script>
+</c:if>
 <div id="s-container">
 <%-- 	<c:if test="${userName eq 'root'}">
 		<a href="schoolNotice/sn_new.jsp" style="float: right; background: orange;">글쓰기</a><br><br>

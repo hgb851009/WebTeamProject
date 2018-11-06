@@ -8,8 +8,8 @@
 </head>
 <body>
 	<script>
-		alert("실패");
-		history.go(-2);
+		alert("로그인실패");
+		history.go(-1);
 	</script>
 </body>
 </html>
