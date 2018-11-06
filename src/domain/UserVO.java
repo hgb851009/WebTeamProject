@@ -8,7 +8,10 @@ public class UserVO {
 	private String userPwd2;
 	private String userLevel;
 	private int userPoint;
-
+	//board 때문에 추가
+	private String classNo;
+	private String level;
+	
 	public int getUserPoint() {
 		return userPoint;
 	}
@@ -75,5 +78,21 @@ public class UserVO {
 				", userPwd2='" + userPwd2 + '\'' +
 				", userLevel='" + userLevel + '\'' +
 				'}';
+	}
+
+	public String getClassNo() {
+		return classNo;
+	}
+
+	public void setClassNo(String classNo) {
+		this.classNo = classNo;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
 }
