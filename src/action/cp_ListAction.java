@@ -37,15 +37,8 @@ public class cp_ListAction implements Action {
 			plist=dao.pList();
 		}
 		
-		if(!clist.isEmpty() && !plist.isEmpty()) {
 			req.setAttribute("clist",clist);
 			req.setAttribute("plist",plist);
-		}else{
-			if(!plist.isEmpty())
-				req.setAttribute("plist", plist);
-			else
-				path="error/error.jsp";
-		}
 		
 		return new ActionForward(path,false);
 	}
