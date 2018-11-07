@@ -26,20 +26,26 @@ public class cp_ListAction implements Action {
 		cp_DAO dao=new cp_DAO();
 		HttpSession session=req.getSession(false);
 		
-		if(session!=null) {
-		user=(String) session.getAttribute("id");
+		if(session.getAttribute("id") == null) {
+			path = "error/error3.jsp";
 		}
-		if(user.equals("root")) {
-			clist=dao.cList(user);
-			plist=dao.pList();
-		}else if(!user.equals("root")){
-			clist=dao.cList();
-			plist=dao.pList();
-		}
-		
+		else {
+			if(session!=null) {
+			user=(String) session.getAttribute("id");
+			}
+	
+			if(user.equals("root")) {
+				clist=dao.cList(user);
+				plist=dao.pList();
+			}else if(!user.equals("root")){
+				clist=dao.cList();
+				plist=dao.pList();
+			}
+			
 			req.setAttribute("clist",clist);
 			req.setAttribute("plist",plist);
 		
+		}
 		return new ActionForward(path,false);
 	}
 

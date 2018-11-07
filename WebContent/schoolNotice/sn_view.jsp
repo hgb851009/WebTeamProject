@@ -33,7 +33,7 @@
         border: 1px solid gray;}
 </style>
 </head>
-<a href="index3.jsp"><img src="images/한글빛로고최종.png" height="120px" align="left"></a>
+<a href="index.jsp"><img src="images/avatar_logo.png" height="120px" align="left"></a>
 <form method="post" role="form">
  <!-- 로그인정보 -->
 <c:set var="userName" value="<%=loginUser%>"></c:set>

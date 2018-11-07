@@ -23,26 +23,34 @@ public class UserDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-	/*	private static String algorithm = "DESede";
-	private static Key Key = null;
-	private static Cipher cipher = null;
-	
-	//SQL 연동 메소드
-	public Connection getConnection() {
-		DataSource ds;
+	/*
+	 * private static String algorithm = "DESede"; private static Key Key = null;
+	 * private static Cipher cipher = null;
+	 * 
+	 * //SQL 연동 메소드 public Connection getConnection() { DataSource ds; try { Context
+	 * ctx = new InitialContext(); ds =
+	 * (DataSource)ctx.lookup("java:comp/env/jdbc/MySQL"); //dataSource =
+	 * (DataSource)envContext.lookup("jdbc/user"); //conn =
+	 * dataSource.getConnection(); return ds.getConnection(); } catch
+	 * (NamingException e) { e.printStackTrace(); } catch (Exception e) { // TODO:
+	 * handle exception } return null; } private void close(Connection con,
+	 * PreparedStatement pstmt, ResultSet rs) { try { if (rs != null) rs.close(); if
+	 * (pstmt != null) pstmt.close(); if (con != null) con.close(); } catch
+	 * (SQLException e) { // TODO Auto-generated catch block e.printStackTrace(); }
+	 * }
+	 */
+
+	private Connection getConnection() {
 		try {
 			Context ctx = new InitialContext();
-			ds  = (DataSource)ctx.lookup("java:comp/env/jdbc/MySQL");
-			//dataSource = (DataSource)envContext.lookup("jdbc/user");
-			//conn = dataSource.getConnection();
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/MySQL");
 			return ds.getConnection();
-		} catch (NamingException e) {
+		} catch (NamingException | SQLException e) {
 			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO: handle exception
 		}
 		return null;
 	}
+
 	private void close(Connection con, PreparedStatement pstmt, ResultSet rs) {
 		try {
 			if (rs != null)
@@ -52,36 +60,25 @@ public class UserDAO {
 			if (con != null)
 				con.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
-	
-	private Connection getConnection() {
-		try {Context ctx=new InitialContext();
-			 	DataSource ds=(DataSource) ctx.lookup("java:comp/env/jdbc/MySQL");
-			 	return ds.getConnection();
-		} catch (NamingException | SQLException e) {
-				e.printStackTrace();
-		}return null;}
-	
-	private void close(Connection con,PreparedStatement pstmt,ResultSet rs) {
-		try {if(rs!=null) rs.close();
-				if(pstmt!=null) pstmt.close();
-				if(con!=null) con.close();
-		}catch(SQLException e) {
-			e.printStackTrace();}}
-	
-	private void close(Connection con,PreparedStatement pstmt) {
-		try {	if(pstmt!=null) pstmt.close();
-				if(con!=null) con.close();
-		}catch(SQLException e) {
-			e.printStackTrace();}}
-	
-	//로그인 메소드
+	}
+
+	private void close(Connection con, PreparedStatement pstmt) {
+		try {
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 로그인 메소드
 	public int login(String userID, String userPwd) {
-		int result=0;
-		
+		int result = 0;
+
 		con = getConnection();
 		String SQL = "SELECT count(*) FROM user WHERE userID=? AND userpwd=?";
 		try {
@@ -89,30 +86,40 @@ public class UserDAO {
 			pstmt.setString(1, userID);
 			pstmt.setString(2, userPwd);
 			rs = pstmt.executeQuery();
-			if(rs.next())
-			result=rs.getInt(1);
+			if (rs.next())
+				result = rs.getInt(1);
 		} catch (SQLException e) {
-				e.printStackTrace();
-		}finally {
-				close(con,pstmt,rs);}
-		return result;}
-	
-/*	//로그인 메소드
-	public int login(String userID, String userPwd) {
+			e.printStackTrace();
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return result;
+	}
+
+	/*
+	 * //로그인 메소드 public int login(String userID, String userPwd) { con =
+	 * getConnection(); String SQL = "SELECT * FROM USER WHERE userID = ?"; try {
+	 * pstmt = con.prepareStatement(SQL); pstmt.setString(1, userID); rs =
+	 * pstmt.executeQuery(); if (rs.next()) { if (rs.getString(2).equals(userPwd)) {
+	 * return 1; // 로그인 성공 } else { return 0; // 비밀번호 불일치 } } return -1; // 아이디가 없음
+	 * } catch (Exception e) { e.printStackTrace(); } finally { try { close(con,
+	 * pstmt, rs); } catch (Exception e) { e.printStackTrace(); } } return -2; //
+	 * 데이터베이스 오류 }
+	 */
+	// 사용자 레벨 확인
+	public String[] getUserInfo(String userID) {
 		con = getConnection();
-		String SQL = "SELECT * FROM USER WHERE userID = ?";
+		String[] userInfo = new String[2];
+		String SQL = "SELECT * FROM user WHERE userID = ?";
 		try {
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setString(1, userID);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				if (rs.getString(2).equals(userPwd)) {
-					return 1; // 로그인 성공
-				} else {
-					return 0; // 비밀번호 불일치
-				}
+				userInfo[0] = rs.getString("userNickName");
+				userInfo[1] = rs.getString("userLevel");
+				return userInfo;
 			}
-			return -1; // 아이디가 없음
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -122,34 +129,10 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
-		return -2; // 데이터베이스 오류
-	}*/
-	//사용자 레벨 확인
-	public String[] getUserInfo(String userID) {
-		con = getConnection();
-		String[] userInfo = new String[2];
-    	String SQL = "SELECT * FROM user WHERE userID = ?";
-    	try{
-    		pstmt = con.prepareStatement(SQL);
-    		pstmt.setString(1, userID);
-    		rs = pstmt.executeQuery();
-    		if(rs.next()){
-    			userInfo[0] = rs.getString("userNickName");
-    			userInfo[1] = rs.getString("userLevel");
-    			return userInfo;
-		    }
-	    } catch (Exception e){
-    		e.printStackTrace();
-	    } finally {
-		    try {
-				close(con, pstmt, rs);
-		    } catch (Exception e) {
-			    e.printStackTrace();
-		    }
-	    }
 		return userInfo;
 	}
-	//개인정보조회
+
+	// 개인정보조회
 	public UserVO userInfo(String userID) {
 		con = getConnection();
 		UserVO dto = new UserVO();
@@ -184,7 +167,8 @@ public class UserDAO {
 		}
 		return dto;
 	}
-	//회원탈퇴처리 (미완)
+
+	// 회원탈퇴처리 (미완)
 	public int userInfoDelete(String userID) {
 		con = getConnection();
 		String SQL = "delete from user where userID = ?";
@@ -203,7 +187,8 @@ public class UserDAO {
 		}
 		return -1; // 데이터베이스 오류
 	}
-	//개인정보변경
+
+	// 개인정보변경
 	public int userInfoModify(String userID, String userNickName, String userPwd, String userLevel) {
 		String SQL = "update user set userNickName=?,userPwd=?,userLevel=? where userID=?";
 		try {
@@ -224,23 +209,24 @@ public class UserDAO {
 		}
 		return -1; // 데이터베이스 오류
 	}
-	//아이디중복
+
+	// 아이디중복
 	public UserVO registerCheck(String userID) {
 		con = getConnection();
-		UserVO vo=null;
+		UserVO vo = null;
 		try {
-			con=getConnection();
+			con = getConnection();
 			con.setAutoCommit(false);
-			if(con!=null) {
-			pstmt = con.prepareStatement("SELECT userid FROM user WHERE userID = ?");
-			pstmt.setString(1, userID);
-			rs = pstmt.executeQuery();
-			if (rs.next() || userID.equals("")) {
-				vo=new UserVO();
-				vo.setUserID(rs.getString(1)); // 가입 가능한 회원 아이디
+			if (con != null) {
+				pstmt = con.prepareStatement("SELECT userid FROM user WHERE userID = ?");
+				pstmt.setString(1, userID);
+				rs = pstmt.executeQuery();
+				if (rs.next() || userID.equals("")) {
+					vo = new UserVO();
+					vo.setUserID(rs.getString(1)); // 가입 가능한 회원 아이디
+				}
+				con.commit();
 			}
-			con.commit();
-		}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -252,35 +238,82 @@ public class UserDAO {
 		}
 		return vo; // 데이터베이스 오류
 	}
-	//회원가입
-	public UserVO register(String userID, String userName,String userNickName,String userPwd) {
-		UserVO result=null;
+
+	// 회원가입
+	public int register(String userID, String userPwd, String userNickName, String userName, String userEmail) {
+		int result = 0;
+		String sql = "INSERT INTO user(userid,userpwd,usernickname,username,useremail) VALUES (?, ?, ?, ?,?)";
+		String sql2 = "INSERT INTO userAvatarTBL(avatarId) values(?)"; 
 		try {
-			con=getConnection();
+			con = getConnection();
 			con.setAutoCommit(false);
-			if(con!=null){
-			pstmt = con.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?)");
-			pstmt.setString(1, userID);
-			pstmt.setString(2, userName);
-			pstmt.setString(3, userNickName);
-			pstmt.setString(4, userPwd);
-			pstmt.executeUpdate();
-			con.commit();
+			if (con != null) {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, userID);
+				pstmt.setString(2, userPwd);
+				pstmt.setString(3, userNickName);
+				pstmt.setString(4, userName);
+				pstmt.setString(5, userEmail);
+				result = pstmt.executeUpdate();
+				
+				if (result > 0)
+				{
+					con.commit();
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, userID);
+					result = pstmt.executeUpdate();
+					if(result > 0)
+						con.commit();
+				}
 			}
 		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		} finally {
 			try {
-				if (rs != null) rs.close();
-				if (pstmt != null) pstmt.close();
-				if (con != null) con.close();
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		return result; // 데이터베이스 오류
 	}
-	//관리자모드 전체조회
+	
+	public int checkIdEmail(String userId, String userEmail) {
+		con = getConnection();
+		
+		String sql = "SELECT userid FROM user WHERE userid = ? or useremail = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userEmail);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) return 1;
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(con, pstmt, rs);
+		}
+		
+		return 0;
+	}
+
+	// 관리자모드 전체조회
 	public ArrayList<UserVO> getMemberAll() {
 		con = getConnection();
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
@@ -301,43 +334,46 @@ public class UserDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (rs != null) rs.close();
-				if (pstmt != null) pstmt.close();
-				if (con != null) con.close();
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		return list;
 	}
-	
+
 	public UserVO selelctUser(String userId) {
 		con = getConnection();
 		UserVO vo = new UserVO();
-		
+
 		String sql = "SELECT userID, userName, userPoint  FROM user WHERE userid = ?";
-		
+
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userId);
-			
+
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()){
+
+			if (rs.next()) {
 				vo.setUserID(rs.getString(1));
 				vo.setUserName(rs.getString(2));
 				vo.setUserPoint(rs.getInt(3));
 			}
-	
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(con, pstmt, rs);
 		}
 		return vo;
 	}
-	
+
 	public AvatarVO selelctAvatar(String avatarId) {
 		con = getConnection();
 		AvatarVO vo = new AvatarVO();
@@ -345,10 +381,10 @@ public class UserDAO {
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, avatarId);
-			
+
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()){
+
+			if (rs.next()) {
 				vo.setAvatarId(rs.getString(1));
 				vo.setAvatarBody(rs.getInt(2));
 				vo.setAvatarHair(rs.getInt(3));
@@ -357,12 +393,12 @@ public class UserDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(con, pstmt, rs);
 		}
 		return vo;
 	}
-	
+
 	public int purchaseItem(String userId, int userPoint) {
 		con = getConnection();
 		int result = 0;
@@ -370,11 +406,11 @@ public class UserDAO {
 		try {
 			con.setAutoCommit(false);
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1,userPoint);
-			pstmt.setString(2,userId);
+			pstmt.setInt(1, userPoint);
+			pstmt.setString(2, userId);
 
 			result = pstmt.executeUpdate();
-			if(result > 0)
+			if (result > 0)
 				con.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -385,29 +421,26 @@ public class UserDAO {
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(con, pstmt, rs);
 		}
 		return result;
 	}
-	
+
 	public int updateItem(String userId, int bid, int hid, int sid) {
 		con = getConnection();
 		int result = 0;
-		String sql = "UPDATE userAvatarTBL "
-				+ "SET avatarBody=?, avatarHair=?, avatarShirt=? "
-				+ "WHERE avatarId=?";
+		String sql = "UPDATE userAvatarTBL " + "SET avatarBody=?, avatarHair=?, avatarShirt=? " + "WHERE avatarId=?";
 		try {
 			con.setAutoCommit(false);
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1,bid);
-			pstmt.setInt(2,hid);
-			pstmt.setInt(3,sid);
-			pstmt.setString(4,userId);
+			pstmt.setInt(1, bid);
+			pstmt.setInt(2, hid);
+			pstmt.setInt(3, sid);
+			pstmt.setString(4, userId);
 
-			
 			result = pstmt.executeUpdate();
-			if(result > 0)
+			if (result > 0)
 				con.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -418,7 +451,7 @@ public class UserDAO {
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(con, pstmt, rs);
 		}
 		return result;

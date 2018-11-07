@@ -18,8 +18,11 @@ body{
 	height:auto;
 }
 
+
 /* 태양 */
 .moving-sun{
+	top:90px;
+	left:90px;
 	margin:0 auto;
 	width:500px;
 	height:500px;
@@ -28,13 +31,13 @@ body{
 }
 /*열기구  */
 .moving-fly{
+	top:250px;
 	margin:0 auto;
 	width:100px;
 	height:100px;
 	background:#40F99\ ;	
 	position:relative;
-	top: 0px;
-	left: 800px;
+	left: 900px;
 }
 
 .animated1{
@@ -71,55 +74,44 @@ body{
 /* 시작점부터 끝까지 움직이는 설정 */
 @keyframes moving1{
 	0%{
-		top:200px;
-		left:10px; 
+		top:90px;
+		left:90px; 
 	}
 	25%{
-		width:100px;
-		height:210px;
-		left:15px;
+		top:100px;
+		left:95px;
 	}
-	50%{
-		width:100px;
-		height:200px;		
-		left:20px;
+	50%{	
+		top:90px;
+		left:100px;
 	}
-	75%{
-		width:100px;
-		height:210px;		
-		left:15px;
+	75%{	
+		top:100px;
+		left:95px;
 	}
 	100%{
-		top:200px;
-		left:10px;		
+		top:90px;
+		left:90px;		
 	}
 }
 @keyframes moving2{
 	0%{
-		top:200px;
+		top:250px;
 		left:0px; 
 	}
 	25%{
-		width:100px;
-		height:100px;
-		bottom:450px;
-	}
-	50%{
-		width:100px;
-		height:100px;		
 		top:350px;
 	}
+	50%{	
+		top:250px;
+	}
 	75%{
-		width:100px;
-		height:100px;		
-		bottom: 200px;
+		top:350px;
 	}
 	100%{
-		top:200px;		
+		top:250px;		
 	}
 }
-
-
 /* 마우스 */
 @import url(https://fonts.googleapis.com/css?family=Oswald);
 @import url(https://fonts.googleapis.com/css?family=Quattrocento);

@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script>
-		alert("로그인실패");	
+		alert("로그인이 필요합니다.");
 		history.go(-1);
 	</script>
 </body>

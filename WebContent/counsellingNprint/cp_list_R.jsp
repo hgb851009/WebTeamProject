@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<a href="index3.jsp"><img src="images/한글빛로고최종.png" height="120px" align="left"></a>
+
 <meta charset="UTF-8">
 <title>DAEWOO</title>
 <style>
@@ -47,6 +47,7 @@
 </style>
 </head>
 <body>
+<a href="index.jsp"><img src="images/avatar_logo.png" height="120px" align="left"></a>
 <c:set var="user" value="<%=loginUser%>"></c:set>
 <c:out value="LOGIN ID : ${user }"></c:out>
 

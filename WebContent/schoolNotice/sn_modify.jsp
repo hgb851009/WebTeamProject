@@ -8,7 +8,7 @@ String loginUser=String.valueOf(session.getAttribute("id"));
 <!DOCTYPE>
 <html>
 <head>
-<a href="index3.jsp"><img src="images/한글빛로고최종.png" height="120px" align="left"></a>
+
 <c:set var="userName" value="<%=loginUser%>"></c:set>
 <%-- <c:out value="LOGIN ID : ${userName }"></c:out> --%>
 <c:if test="${userName ne 'root'}">
@@ -53,6 +53,9 @@ location.replace("../");
      }
 </style>
 </head>
+<body>
+<a href="index.jsp"><img src="images/avatar_logo.png" height="120px" align="left"></a>
+
 <div id="s-container">
 <form action="update.do" method="post" role="form" enctype="multipart/form-data">
 	<h2 align="center">글 작성</h2>
@@ -121,10 +124,11 @@ location.replace("../");
 	<button type="reset">reset</button>
 	<button type="submit" style="font-size: 15px; font-weight: bold;">submit</button>
 </div>
-</div>
 	<input type="hidden" value="${vo.bno}" name="bno">
 	<input type="hidden" value='<%=request.getParameter("page")%>' name="page">
 	<input type="hidden" value='${search.criteria }' name="criteria">
 	<input type="hidden" value='${search.keyword }' name="keyword">
 </form>
+</div>
+</body>
 </html>

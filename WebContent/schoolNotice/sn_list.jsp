@@ -45,7 +45,7 @@
 </style>
 </head>
 <body>
-<a href="index3.jsp"><img src="images/한글빛로고최종.png" height="120px" align="left"></a>
+<a href="index.jsp"><img src="images/avatar_logo.png" height="120px" align="left"></a>
 <c:set var="userName" value="<%=loginUser%>"></c:set>
 <%-- <c:out value="LOGIN ID : ${userName }"></c:out> --%>
 <div id="s-banner" align="right"><input type="button" id="work" style="height: 80px; width:180px; font-size: 30px;
@@ -58,6 +58,7 @@ onclick="location.href='workInfo.do'" value="채용 공고 >"></div>
 <div id="s-header">
 	<h1 align="center">학교 소식</h1>
 </div>
+
 <div id="s-content">
     <table>
     <colgroup>
