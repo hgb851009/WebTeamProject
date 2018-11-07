@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+
+header{
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+}
+nav ul {
+
+	list-style: none; /* 블릿 없애기 */
+	text-align: center; /* 글자 가운데로 */
+	border-top: 3px solid green;
+	border-bottom: 3px solid green;
+	padding: 10px; /* 위, 아래, 오른쪽, 왼쪽 모두 10px */
+}
+
+nav ul li {
+	font-family:'Montserrat', sans-serif;
+	display: inline; /*li가 가지는 블럭 요소를 인라인으로 변경*/
+	letter-spacing: 10px; /*글자 간격*/
+	padding:0px 90px; /*위,아래 0px, 오른쪽,왼쪽10px*/
+	line-height: 150%;
+}
+/*링크 태그 밑줄 없애고 링크 문자 색상은 검정으로 변경*/
+nav a{
+	text-decoration: none;
+	color:black;
+}
+
+#text-center {
+	
+}
