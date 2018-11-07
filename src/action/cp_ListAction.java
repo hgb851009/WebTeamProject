@@ -29,10 +29,10 @@ public class cp_ListAction implements Action {
 		if(session!=null) {
 		user=(String) session.getAttribute("id");
 		}
-		if(user!="root") {
+		if(user.equals("root")) {
 			clist=dao.cList(user);
 			plist=dao.pList();
-		}else if(user=="root"){
+		}else if(!user.equals("root")){
 			clist=dao.cList();
 			plist=dao.pList();
 		}

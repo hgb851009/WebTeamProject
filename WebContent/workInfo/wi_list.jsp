@@ -42,11 +42,23 @@
     	text-decoration:none;}
     sub{
     	color:silver;}
+   	#s-sn {
+ 		position: fixed;
+		width: 100px;
+		height: 110px;
+		top: 420px;
+		left: 1%;
+        padding: 20px;
+		margin-right: -900px;}
 </style>
 </head>
 <body>
+<a href="index3.jsp"><img src="images/한글빛로고최종.png" height="120px" align="left"></a>
 <c:set var="userName" value="<%=loginUser%>"></c:set>
-<c:out value="LOGIN ID : ${userName }"></c:out>
+<%-- <c:out value="LOGIN ID : ${userName }"></c:out> --%>
+<div id="s-sn" align="left"><input type="button" id="work" style="height: 80px; width:180px; font-size: 30px;
+border-color: navy; background-color: white; font-weight: bold; " 
+onclick="location.href='select.do'" value="< 학교 소식"></div>
 <div id="s-banner" align="right">
 <div align="center"><br>
 <h5>- Link List -</h5><br>
